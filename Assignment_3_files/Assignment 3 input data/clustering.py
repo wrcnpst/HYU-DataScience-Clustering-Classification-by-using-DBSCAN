@@ -4,16 +4,26 @@ import sys
 import os
 from collections import Counter
 
-# Make sure we have the right number of arguments
-if len(sys.argv) != 5:
-    print("Usage: clustering.py <input_file> <n_clusters> <eps> <minPts>")
-    sys.exit(1)
+if len(sys.argv) == 5:
+    input_file = sys.argv[1]
+    n_clusters = int(sys.argv[2])
+    eps = int(sys.argv[3])
+    minPts = int(sys.argv[4])
 
-# Get the command line arguments
-input_file = sys.argv[1]
-n_clusters = int(sys.argv[2])
-eps = float(sys.argv[3])
-minPts = int(sys.argv[4])
+    # python clustering.py input1.txt 8 15 22
+else:
+    print("Usage: clustering.py <input_file> <n_clusters> <eps> <minPts>")
+
+# # Make sure we have the right number of arguments
+# if len(sys.argv) != 5:
+#     print("Usage: clustering.py <input_file> <n_clusters> <eps> <minPts>")
+#     sys.exit(1)
+
+# # Get the command line arguments
+# input_file = sys.argv[1]
+# n_clusters = int(sys.argv[2])
+# eps = float(sys.argv[3])
+# minPts = int(sys.argv[4])
 
 # input_file = "Assignment_3_files\Assignment 3 input data\input1.txt"
 # n_clusters = 8
@@ -70,20 +80,22 @@ labels = dbscan(X, euclidean_distance, eps, minPts)
 # Count number of points in each cluster
 cluster_counts = Counter(labels)
 
-# If there are more than n_clusters, remove the smallest ones
-if len(cluster_counts) > n_clusters:
-    smallest_clusters = [cluster for cluster, count in cluster_counts.most_common()[:-n_clusters-1:-1]]
-    labels = [label if label not in smallest_clusters else -1 for label in labels]
+print('Done')
 
-# Create output directory if it doesn't exist
-output_dir = os.path.splitext(input_file)[0]
-os.makedirs(output_dir, exist_ok=True)
+# # If there are more than n_clusters, remove the smallest ones
+# if len(cluster_counts) > n_clusters:
+#     smallest_clusters = [cluster for cluster, count in cluster_counts.most_common()[:-n_clusters-1:-1]]
+#     labels = [label if label not in smallest_clusters else -1 for label in labels]
 
-# Output each cluster to a separate file
-for cluster in set(labels):
-    if cluster == -1:  # Skip noise points
-        continue
-    with open(f"{output_dir}_cluster_{cluster}.txt", 'w') as f:
-        for i, label in enumerate(labels):
-            if label == cluster:
-                f.write(f"{data.iloc[i]['object_id']}\n")
+# # Create output directory if it doesn't exist
+# output_dir = os.path.splitext(input_file)[0]
+# os.makedirs(output_dir, exist_ok=True)
+
+# # Output each cluster to a separate file
+# for cluster in set(labels):
+#     if cluster == -1:  # Skip noise points
+#         continue
+#     with open(f"{output_dir}_cluster_{cluster}.txt", 'w') as f:
+#         for i, label in enumerate(labels):
+#             if label == cluster:
+#                 f.write(f"{data.iloc[i]['object_id']}\n")
