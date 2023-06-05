@@ -15,7 +15,7 @@ if len(sys.argv) == 5:
 else:
     print("Usage: clustering.py <input_file> <n_clusters> <eps> <minPts>")
 
-print('Done 1')
+print('Done: valid command input')
 
 # # Make sure we have the right number of arguments
 # if len(sys.argv) != 5:
@@ -28,10 +28,10 @@ print('Done 1')
 # eps = float(sys.argv[3])
 # minPts = int(sys.argv[4])
 
-input_file = "Assignment_3_files\Assignment 3 input data\input1.txt"
-n_clusters = 8
-eps = 15
-minPts = 22
+# input_file = "Assignment_3_files\Assignment 3 input data\input1.txt"
+# n_clusters = 8
+# eps = 15
+# minPts = 22
 
 # Load the data from a text file
 data = pd.read_csv(input_file, sep='\t', header=None, names=['object_id', 'x', 'y'])
@@ -57,6 +57,8 @@ def dbscan(DB, distFunc, eps, minPts):
     labels = [0]*len(DB)
 
     for P in range(len(DB)):
+        if P % 500 == 0:
+            print("seed no.", P)
         if not (labels[P] == 0):
             continue
         neighbors = range_query(DB, distFunc, P, eps)
@@ -81,13 +83,13 @@ labels = dbscan(X, euclidean_distance, eps, minPts)
 print('Done Labeling')
 
 data['cluster'] = labels
-data.to_csv(r"C:\Users\DeRoxy\Documents\GitHub\HYU-DataScience-Clustering-Classification-by-using-DBSCAN\Assignment_3_files\Assignment 3 input data\output1.csv", index=False)
-print('Done export data')
+data['object_id'] = data['object_id'].astype(str)
+# data.to_csv(r"C:\Users\DeRoxy\Documents\GitHub\HYU-DataScience-Clustering-Classification-by-using-DBSCAN\Assignment_3_files\Assignment 3 input data\output1.csv", index=False)
+# print('Done export data')
 
-# Count number of points in each cluster
-cluster_counts = Counter(labels)
-
-print('Done cluster_counts: ', cluster_counts)
+# # Count number of points in each cluster
+# cluster_counts = Counter(labels)
+# print('Done cluster_counts: ', cluster_counts)
 
 # If there are more than n_clusters, remove the smallest ones
 # if len(cluster_counts) > n_clusters:
@@ -103,8 +105,8 @@ print('Done output_dir: ', output_dir)
 for cluster in set(labels):
     if cluster == -1:  # Skip noise points
         continue
-    with open(f"{output_dir}_cluster_{cluster}.txt", 'w') as f:
+    with open(f"{output_dir}_cluster_{cluster-1}.txt", 'w') as f:
         for i, label in enumerate(labels):
             if label == cluster:
                 f.write(f"{data.iloc[i]['object_id']}\n")
-    print('Done separate file: ', output_dir, cluster)
+    print('Done separate file: ', output_dir, cluster-1)
