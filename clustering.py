@@ -10,23 +10,10 @@ if len(sys.argv) == 5:
     eps = int(sys.argv[3])
     minPts = int(sys.argv[4])
 
-    # python clustering.py input1.txt 8 15 22
-    # C:/Users/DeRoxy/AppData/Local/Microsoft/WindowsApps/python3.10.exe "c:/Users/DeRoxy/Documents/GitHub/HYU-DataScience-Clustering-Classification-by-using-DBSCAN/Assignment_3_files/Assignment 3 input data/clustering.py" "C:\Users\DeRoxy\Documents\GitHub\HYU-DataScience-Clustering-Classification-by-using-DBSCAN\Assignment_3_files\Assignment 3 input data\input1.txt" 8 15 22
 else:
     print("Usage: clustering.py <input_file> <n_clusters> <eps> <minPts>")
 
 print('Done: valid command input')
-
-# # Make sure we have the right number of arguments
-# if len(sys.argv) != 5:
-#     print("Usage: clustering.py <input_file> <n_clusters> <eps> <minPts>")
-#     sys.exit(1)
-
-# # Get the command line arguments
-# input_file = sys.argv[1]
-# n_clusters = int(sys.argv[2])
-# eps = float(sys.argv[3])
-# minPts = int(sys.argv[4])
 
 # input_file = "Assignment_3_files\Assignment 3 input data\input1.txt"
 # n_clusters = 8
