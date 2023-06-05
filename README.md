@@ -9,6 +9,7 @@ C:/Users/DeRoxy/AppData/Local/Microsoft/WindowsApps/python3.10.exe clustering.py
 & "C:\Users\DeRoxy\Documents\GitHub\HYU-DataScience-Clustering-Classification-by-using-DBSCAN\Assignment_3_files\Assignment 3 self test\PA3.exe" input
 
 ## Test result
+
 data    | acc.1     | acc.2
 ---     | ---       | ---
 input1  | 98.98035  | 98.98035
